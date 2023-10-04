@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
-  persistStore,
+  // persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -28,4 +28,4 @@ export const store = configureStore({
 });
 
 // Створення сховища, яке зберігає значення стану сховища Redux при перевантаження сторінки
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);

@@ -1,5 +1,7 @@
-import { useSelector } from "react-redux";
-import { getContacts } from 'redux/selectors';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectContacts } from 'redux/selectors';
+import { fetchContacts } from '../../redux/operations';
 
 import { Container, Title, SubTitle, Wrapper } from './App.styled';
 import ContactForm from '../ContactForm/ContactForm';
@@ -8,7 +10,14 @@ import Filter from '../Filter/Filter';
 
     
 const App = () => {
-  const contacts = useSelector(getContacts);
+  //використання селектора selectContacts для отримання списку контактів з Redux-сховища
+  const contacts = useSelector(selectContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //запуск асинхронної Thunk-дії fetchContacts при монтуванні компонента
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
     return (
       <Container>
@@ -16,13 +25,14 @@ const App = () => {
         <ContactForm/>
         <SubTitle>Contacts</SubTitle>
         {contacts.length > 0 ? (
-          // Фільтр для відображення контактів
+          // якщо є контакти показує компонент фільтрації
           <Filter/>
         ) : (
+            //якщо немає контаків виводить повідомлення про вілдсутність контактів
           <Wrapper>Your phonebook is empty. Add first contact!</Wrapper>
         )}
         {contacts.length > 0 && (
-          // Список контактів
+          // якщо є контакти показує компонент списку контактів
           <ContactList/>
         )}
       </Container>

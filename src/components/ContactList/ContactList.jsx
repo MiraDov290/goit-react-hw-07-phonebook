@@ -2,14 +2,14 @@ import React from 'react';
 import { List, Item, Button } from './ContactList.styled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getVisibleContacts } from 'redux/selectors';
-import { removeContact } from 'redux/contactsSlice';
+import { selectVisibleContacts } from 'redux/selectors';
+import { deleteContacts } from '../../redux/operations';
 
 // Компонент списка контактiв
 const ContactList = () => {
-  const contacts = useSelector(getVisibleContacts);
+  const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(removeContact());
+  // const handleDelete = () => dispatch(removeContact());
   return (
     <List>
       {contacts.map(contact => (
@@ -17,7 +17,7 @@ const ContactList = () => {
           {contact.name + ' : ' + contact.number}
           {
             // Кнопка видалення контакта
-            <Button type="button" name="delete" onClick={handleDelete}>
+            <Button type="button" name="delete" onClick={() => dispatch(deleteContacts(contact.id))}>
               delete
             </Button>
           }

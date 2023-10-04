@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { Form, Label, Button, Input } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVisibleContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
 // Генерація унікальних ідентифікаторів для полів форми
@@ -13,7 +13,7 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getVisibleContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
 
