@@ -16,9 +16,11 @@ import { fetchContacts, addContacts, deleteContacts } from './operations';
 //визначення масиву extraActions, що містить асинхронні Thunk-дії
 const extraActions = [fetchContacts, addContact, deleteContacts];
 
+// const getActions = type => isAnyOf(...extraActions.map(action => action[type]))
+
 //визначення функції getAction, яка повертає умову isAnuOf для зазначеного типу дії
-const getActions = tupe =>
-  isAnyOf(fetchContacts[tupe], addContact[tupe], deleteContacts[tupe]);
+const getActions = type =>
+  isAnyOf(fetchContacts[type], addContact[type], deleteContacts[type]);
 
 //початковий стан для contactsSlice
 const initialState = { items: [], isLoading: false, error: null };
