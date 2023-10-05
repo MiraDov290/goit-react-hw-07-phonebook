@@ -3,7 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { Form, Label, Button, Input } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { addContacts } from 'redux/operations';
 
 // Генерація унікальних ідентифікаторів для полів форми
   const nameInputId = nanoid();
@@ -31,7 +31,7 @@ const handleSubmit = event => {
     return;
   }
   
-  dispatch(addContact({ name, number }));
+  dispatch(addContacts({ name, number }));
   setName('')
   setNumber('');
 };
